@@ -1,0 +1,9 @@
+div {
+  min-height: 1000px;
+  min-width: 100%;
+  background: aqua;
+}
+
+img {
+  position: absolute;
+}
