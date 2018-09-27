@@ -10,26 +10,23 @@ import {Component, OnInit} from '@angular/core';
 
 export class AppComponent  implements OnInit  {
   title = 'Facemaker';
-  div;
+  canvas;
   z = 0;
   images = [];
+  image;
   imageElements = [];
   mouseX = 0;
   mouseY = 0;
+  width = 400;
+  height = 400;
+  cxt;
   makeFarvardin(x, y) {
-    if (!this.images.includes('' + x + ',' + y)) {
-      const width = 400;
-      const height = 400;
-      const image = new Image(width, height);
-      image.src = '../assets/farvardin-no-neck-small.png';
-      image.setAttribute('style', 'left: ' + (x - width / 2) + 'px; top: ' + (y - height / 2) + 'px; z-index: '
+      const image = new Image(this.width, this.height);
+      image.src = 'assets/farvardin-no-neck-small.png';
+      image.setAttribute('style', 'left: ' + (x - this.width / 2) + 'px; top: ' + (y - this.height / 2) + 'px; z-index: '
                           + this.z++ + '; position: absolute');
-      this.div.appendChild(image);
-      this.images.push('' + x + ',' + y);
-      // while(this.imageElements.push(image) > 200) {
-      //   this.imageElements.shift().remove();
-      // }
-    }
+      this.canvas.appendChild(image);
+    // this.cxt.drawImage(this.image, x - this.width / 2, y - this.height / 2);
   }
   handleClick() {
   }
@@ -38,6 +35,12 @@ export class AppComponent  implements OnInit  {
     console.log(event);
   }
   ngOnInit() {
-    this.div = document.getElementById('canvas');
+    this.canvas = document.getElementById('mainCanvas');
+    this.canvas.height = document.body.clientHeight;
+    this.canvas.width = document.body.clientWidth;
+    this.canvas.style = 'min-width: ' + document.body.clientWidth + '; min-height: ' + document.body.clientHeight + ';';
+    // this.cxt = this.canvas.getContext('2d');
+    // this.image = new Image(this.width, this.height);
+    // this.image.src = 'assets/farvardin-no-neck.png';
   }
 }
